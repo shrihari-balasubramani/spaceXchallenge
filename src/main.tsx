@@ -14,11 +14,9 @@ const enTranslations = {
 };
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <AppProvider i18n={enTranslations}>
-        <App />
-      </AppProvider>
-    </ApolloProvider>
-  </React.StrictMode>
+  <ApolloProvider client={client}>
+    <AppProvider i18n={enTranslations}>
+      <App />
+    </AppProvider>
+  </ApolloProvider>
 );
