@@ -1,10 +1,10 @@
 import { Page } from "@shopify/polaris";
-import { ListViewShips } from "./components/list-view-ships";
+import { GridViewShips } from "./components/grid-view-ships";
 
 function App() {
   return (
     <div style={{ margin: "100px" }}>
-      <ListViewShips />
+      <GridViewShips />
     </div>
   );
 }

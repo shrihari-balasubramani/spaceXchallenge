@@ -1,33 +1,63 @@
 import { Stack, Text, Box } from "@shopify/polaris";
-import styled from "styled-components";
+import { useQuery, gql } from "@apollo/client";
 import { Card } from "../card";
 import { ShipImage } from "../ship-image";
 import { TextContentWrapper } from "./text-content-wrapper";
 import { TitleValue } from "../title-value";
+import { ShipsVars, ShipsData } from "../../types";
+import { GET_LIST_VIEW_SHIPS } from "./get-list-view-ships.graphql";
+import Placeholder from "../../placeholder.png";
 
 export const ListViewShips = () => {
-  const imgSrc = "https://i.imgur.com/5w1ZWre.jpg";
-  const name = "GO Ms Tree";
+  const { loading, error, data } = useQuery<ShipsData, ShipsVars>(
+    GET_LIST_VIEW_SHIPS,
+    {
+      variables: { offset: 0 },
+    }
+  );
+
+  if (loading) {
+    return "loading";
+  }
+  if (error || !data) {
+    return "something wen't wrong";
+  }
   return (
-    <Card>
-      <ShipImage src={imgSrc} />
-      <TextContentWrapper>
-        <Box padding="4" as="div">
-          <Stack vertical spacing="loose">
-            <Text as="h5" variant="heading2xl">
-              {name}
-            </Text>
-            <Stack vertical spacing="extraTight">
-              <TitleValue
-                title="Home Port"
-                value="No supplier listedPort Canaveral"
-              />
-              <TitleValue title="Year Built" value="1985" />
-              <TitleValue title="Class" value="tesla Model X" />
-            </Stack>
-          </Stack>
-        </Box>
-      </TextContentWrapper>
-    </Card>
+    <Stack vertical spacing="extraLoose">
+      {data?.ships.map((eachShip) => {
+        return (
+          <Card>
+            <ShipImage src={eachShip.image ?? Placeholder} />
+
+            <TextContentWrapper>
+              <Box padding="4" as="div">
+                <Stack vertical spacing="loose">
+                  <Text as="h5" variant="heading2xl">
+                    {eachShip.name}
+                  </Text>
+                  <Stack vertical spacing="extraTight">
+                    {eachShip.year_built && (
+                      <TitleValue
+                        title="Year Built"
+                        value={`${eachShip.year_built}`}
+                      />
+                    )}
+                    {eachShip.home_port && (
+                      <TitleValue
+                        title="Home Port"
+                        value={`${eachShip.home_port}`}
+                      />
+                    )}
+                    {eachShip.type && (
+                      <TitleValue title="Type" value={`${eachShip.type}`} />
+                    )}
+                  </Stack>
+                </Stack>
+              </Box>
+            </TextContentWrapper>
+          </Card>
+        );
+      })}
+    </Stack>
   );
 };

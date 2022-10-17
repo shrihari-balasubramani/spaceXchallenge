@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Placeholder from "../placeholder.png";
 
 const ImageWrapper = styled.div`
   height: 100%;
@@ -14,6 +15,7 @@ const ImageStyled = styled.img`
   height: 100%;
   object-fit: cover;
   display: block;
+  aspect-ratio: 16/9;
 `;
 
 export type ShipImageProps = {
@@ -23,7 +25,10 @@ export type ShipImageProps = {
 export const ShipImage = ({ src }: ShipImageProps) => {
   return (
     <ImageWrapper as="div">
-      <ImageStyled src={src} />
+      <ImageStyled
+        src={src}
+        onError={(e) => (e.currentTarget.src = Placeholder)}
+      />
     </ImageWrapper>
   );
 };
