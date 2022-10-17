@@ -12,6 +12,7 @@ const CardWrapper = styled.div`
   border-radius: inherit;
   display: flex;
   flex-direction: column;
+
   @media screen and (min-width: 850px) {
     flex-direction: row;
   }
