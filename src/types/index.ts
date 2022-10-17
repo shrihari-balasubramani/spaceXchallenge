@@ -6,6 +6,7 @@ export type Ship = {
   home_port: string;
   year_built: number;
   type: string;
+  id: string;
 };
 
 export type ShipsData = {
@@ -14,4 +15,5 @@ export type ShipsData = {
 
 export type ShipsVars = {
   offset: number;
+  limit: number;
 };

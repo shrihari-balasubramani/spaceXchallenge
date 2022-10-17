@@ -1,9 +1,10 @@
 import { gql } from "@apollo/client";
 
 export const GET_LIST_VIEW_SHIPS = gql`
-  query GetListViewShips($offset: Int!) {
-    ships(offset: $offset) {
+  query GetListViewShips($offset: Int!, $limit: Int!) {
+    ships(offset: $offset, limit: $limit) {
       name
+      id
       url
       image
       active

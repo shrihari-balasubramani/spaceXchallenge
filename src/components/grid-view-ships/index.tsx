@@ -10,7 +10,7 @@ export const GridViewShips = () => {
   const { loading, error, data } = useQuery<ShipsData, ShipsVars>(
     GET_GRID_VIEW_SHIPS,
     {
-      variables: { offset: 0 },
+      variables: { offset: 0, limit: 10 },
     }
   );
 
