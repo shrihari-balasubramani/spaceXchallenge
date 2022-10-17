@@ -43,10 +43,18 @@ export const GridViewShips = () => {
   }, []);
 
   if (loading) {
-    return "loading";
+    return (
+      <Text as="p" variant="headingSm">
+        loading
+      </Text>
+    );
   }
   if (error || !data) {
-    return "something wen't wrong";
+    return (
+      <Text as="p" variant="headingSm">
+        something wen't wrong
+      </Text>
+    );
   }
   return (
     <InfiniteScroll

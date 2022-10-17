@@ -20,10 +20,3 @@ function App() {
 }
 
 export default App;
-
-// have a state
-/* create a header
-    - viewType
-    - onViewChange
-
-*/

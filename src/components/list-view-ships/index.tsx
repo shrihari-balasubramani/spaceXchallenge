@@ -18,7 +18,6 @@ const Wrapper = styled.div`
 `;
 
 export const ListViewShips = () => {
-  const [limit, setLimit] = useState(10);
   const { loading, error, data, fetchMore } = useQuery<ShipsData, ShipsVars>(
     GET_LIST_VIEW_SHIPS,
     {
@@ -43,11 +42,20 @@ export const ListViewShips = () => {
   }, [data?.ships]);
 
   if (loading) {
-    return "loading";
+    return (
+      <Text as="p" variant="headingSm">
+        loading
+      </Text>
+    );
   }
   if (error || !data) {
-    return "something wen't wrong";
+    return (
+      <Text as="p" variant="headingSm">
+        something wen't wrong
+      </Text>
+    );
   }
+
   return (
     <Wrapper>
       <Stack vertical spacing="extraLoose" distribution="center">
